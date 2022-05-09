@@ -128,24 +128,24 @@
 
 #--------practise question 2
 # Minimum index finder
-def minIndex(arr, s, e):
+# def minIndex(arr, s, e):
 	
-	sml = sys.maxsize
-	mindex = 0
+# 	sml = sys.maxsize
+# 	mindex = 0
 	
-	for i in range(s, e):
-		if (sml > arr[i]):
-			sml = arr[i]
-			mindex = i
+# 	for i in range(s, e):
+# 		if (sml > arr[i]):
+# 			sml = arr[i]
+# 			mindex = i
 			
-	return mindex
+# 	return mindex
 
-def fun2(arr, start_index, end_index):
+# def fun2(arr, start_index, end_index):
 	
-	if (start_index >= end_index):
-		return
+# 	if (start_index >= end_index):
+# 		return
 		
-	# minIndex() returns index of minimum value in array arr[start_index...end_index]
-	min_index = minIndex(arr, start_index, end_index)
-	arr[start_index], arr[min_index] = arr[min_index], arr[start_index]
-	fun2(arr, start_index + 1, end_index)
+# 	# minIndex() returns index of minimum value in array arr[start_index...end_index]
+# 	min_index = minIndex(arr, start_index, end_index)
+# 	arr[start_index], arr[min_index] = arr[min_index], arr[start_index]
+# 	fun2(arr, start_index + 1, end_index)
