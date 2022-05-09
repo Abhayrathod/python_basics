@@ -2,7 +2,7 @@
     # print(a,b,c,d)
 # function_name_print("anjdcj", "dcnjc", "dsjcdb", "dcjd")
 
-# python program for args and kwargs
+#--------------python program for args and kwargs
 # def funargs(normal,*args,**kwargs):
 #     print(normal)
 #     print(type(args))
@@ -18,13 +18,13 @@
 # funargs(normal, *ab, **kw)
 
 
-# Python program to illustrate *args for variable number of arguments
+#--------------Python program to illustrate *args for variable number of arguments
 # def myFun(*argv):
 # 	for arg in argv:
 # 		print (arg)
 # myFun('Hello', 'Welcome', 'to', 'GeeksforGeeks')
 
-#printing first argument thorugh argument 
+#---------------printing first argument thorugh argument 
 # def myfun(argv1, *args):
 #     print("First argument: ", argv1)
 #     for args in args:

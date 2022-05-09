@@ -5,7 +5,7 @@
 # print(minus(8,5))
 
 
-            #SORTING OUT WITH LAMBDA
+#-------------SORTING OUT WITH LAMBDA-----------------
 
 # def a_first(a):
 #     return a[1]
@@ -28,7 +28,7 @@
 
 
 # a = [100, 2, 8, 60, 5, 4, 3, 31, 10, 11]
-# in filter either we use assignment or conditional operator, the pass actualbparameter will get return
+# in filter either we use assignment or conditional operator, the pass actual parameter will get return
 # filtered = filter (lambda x: x % 2 == 0, a)
 # print(list(filtered))
 
