@@ -17,7 +17,7 @@
 # a = funcret()
 # print(a)
 
-# def executor(func):             # returning function as an argument
+# def executor(func):             # returning function as an argument   
 #     func("this")
 # executor(print)
 
@@ -126,7 +126,7 @@ def multiply1_decorator(function):
     return inner
 
 @multiply_decorator
-@multiply1_decorator 
+@multiply1_decorator
 def number():
     return 10
 print(number())

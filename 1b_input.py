@@ -2,6 +2,11 @@
                     
 # a,b = input().split()      # No argument in split means that it will use a space to differentiate between values
 # print("the values are {} and {}".format(a,b))
+# print("the values are {1} and {0}".format(a,b))         #these values can be passed as index number starting from 0
+# stri = "the values are {} and{}"                      #this is also a method to use format in python
+# print(stri.format(a,b))
+# print("Every {3} should know the use of {2} {1} programming and {0}"
+    #   .format("programmer", "Open", "Source", "Operating Systems"))       #another method to use format method in python
 
                             # Python program showing how to take multiple input using split
 

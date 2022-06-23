@@ -21,18 +21,18 @@ import threading
 # print("abhay")
 # print(t)
 
-# def disp():
-#     for i in range(5):
-#         a = current_thread().getName
-#         print(a)
-#         print("child thread", current_thread().name)
+def disp():
+    for i in range(100):
+        a = current_thread().getName
+        print(a)
+        print("child thread", current_thread().name)
 
-# t = Thread(target= disp)
-# t1 = Thread(target= disp)
-# t.start()
-# t1.start()
-# for i in range(5):
-#     print("main thread",current_thread().name)
+t = Thread(target= disp)
+t1 = Thread(target= disp)
+t.start()
+t1.start()
+for i in range(5):
+    print("main thread",current_thread().name)
 
 
                         # 2 CREATNG A THREAD BY CREATING A CHILD CLASS TO THREAD Class

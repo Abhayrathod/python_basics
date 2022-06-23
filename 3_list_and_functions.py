@@ -10,8 +10,8 @@
 # ['One', 'Two', 'Three']               # list of strings 
 
 # # List Methods :
-l1=[1,8,4,3,15,20,25,89,65]       #l1 is a list
-# print(l1)
+# l1=[1,8,4,3,15,20,25,89,65]       #l1 is a list
+# print(l1) 
 
 # l1.sort()
 # print(l1)      #l1 after sorting
@@ -133,3 +133,15 @@ l1=[1,8,4,3,15,20,25,89,65]       #l1 is a list
 # print(items*2)
 # print(items.index('bike'))
 # print(items.count('new'))
+
+
+#-----------------convert list to dictionary-------------––––––––––––––––––––
+# lst = ['a', 1, 'b', 2, 'c', 3]
+# def convert_to_dict(lst):
+#     res_dct = {lst[i]:lst[i+1] for i in range(0,len(lst),2)}
+#     return res_dct
+# print(convert_to_dict(lst))
+
+#----------------------------list comprehsion------------------------------
+# lst = [i for i in range(100) if i%3==0]
+# print(lst)

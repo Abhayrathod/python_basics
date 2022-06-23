@@ -24,3 +24,6 @@
 # set1.update(dict1)
 # print(set1)
 
+#---------------------set comprehension-------------------------
+# dresses = {dress for dress in ['dress1', 'dress1','dress2','dress2', 'dress3','dress3']}
+# print(dresses)

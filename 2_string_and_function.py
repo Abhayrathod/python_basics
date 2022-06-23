@@ -1,13 +1,14 @@
 # String Functions:
 
-demo = "aakash is a programmer" 
+# demo = "Aakash is a proogrammer"
+# print(demo)
 # print(demo.endswith("boy"))
 # print(demo.count('o'))
 # print(demo.capitalize())
 # print(demo.upper())
 # print(demo.lower())
-# print(demo.find("is"))
-# print(demo.find("good","nice"))
+# print(demo.find("is"))     #returns the position of the starting character of the string you are searching (index starts from 0)
+# print(demo.find("aakash","a"))
 # print(demo[13])
 # print(demo[2:6])
 # print(demo[0:11:2])
@@ -31,16 +32,16 @@ demo = "aakash is a programmer"
 # print(mystr.replace("is", "are"))
 
 
-age = '25'
-txt = "my name is abhay"+   age
-print(txt)
+# age = '25'
+# txt = "my name is abhay"+   age
+# print(txt)
 
-quantity = '25'
-age = '16'
-price = '43'
-falana = 'falaaaana'
-dhekna = 'dheknaaaa'
+# quantity = '25'
+# age = '16'
+# price = '43'
+# falana = 'falaaaana'
+# dhekna = 'dheknaaaa'
 
-order = "i bought {} apples and my  age  is {} year {},{}"
+# order = "i bought {} apples and my  age  is {} year {},{}"
 
-print(order.format(quantity, age,falana,dhekna))
+# print(order.format(quantity, age,falana,dhekna))

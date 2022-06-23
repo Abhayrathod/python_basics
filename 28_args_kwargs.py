@@ -3,19 +3,19 @@
 # function_name_print("anjdcj", "dcnjc", "dsjcdb", "dcjd")
 
 #--------------python program for args and kwargs
-# def funargs(normal,*args,**kwargs):
-#     print(normal)
-#     print(type(args))
-#     print(args[4])
-#     for items in args:
-#         print(items)
-#     print("now i will introduce some random stuff")
-#     for key, value in kwargs.items():
-#         print(f"{key} is a {value}")
-# normal = ("this is me")
-# kw = {"abhay":"programmer", "abc":"newtown","bcd":"def","cde":"efg"}
-# ab = ["dc", "dnbchjd", "dcbhjdsbc", "ndcjbdhc", "dcbhjsdvc"]
-# funargs(normal, *ab, **kw)
+def funargs(normal,*args,**kwargs):
+    print(normal)
+    print(type(args))
+    print(args[4])
+    for items in args:
+        print(items)
+    print("now i will introduce some random stuff")
+    for key, value in kwargs.items():
+        print(f"{key} is a {value}")
+normal = ("this is me")
+kw = {"abhay":"programmer", "abc":"newtown","bcd":"def","cde":"efg"}
+ab = ["dc", "dnbchjd", "dcbhjdsbc", "ndcjbdhc", "dcbhjsdvc"]
+funargs(normal, *ab, **kw)
 
 
 #--------------Python program to illustrate *args for variable number of arguments
