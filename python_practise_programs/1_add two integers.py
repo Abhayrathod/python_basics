@@ -1,6 +1,7 @@
 # a = int(input("Enter the 1st no"))
 # b = int(input("Enter the second no"))
 # c = [a,b]
+# print(sum([1,2,3,4,5,6]))
 # print(sum(c))  #sum function takes list as a argument and sum all the no in the list.
 # print(sum(c,50))  # sum(iterable,start) sum function takes list,dict,tuple as argument and takes start - which is added to the sum
 
@@ -13,5 +14,10 @@
 
 #-------------------sum function with tuple------------------------
 
-tp = (1,2,3,4,5,6,7,8,9)
-print(sum(tp))
+# tp = (1,2,3,4,5,6,7,8,9)
+# print(sum(tp))
+
+#-------------------sum function with set--------------------------
+
+# st = {1,2,3,4,5,6,7,8,9}
+# print(sum(st))
