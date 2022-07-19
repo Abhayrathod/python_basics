@@ -46,3 +46,24 @@
 # n1 = [1,2,3]
 # n2 = [4,5,6]
 # result = map(lambda x,y:x+y,n1,n2)
+
+#---------------------------------------------------
+
+
+# def func(fun):
+
+#     def inn_fa():
+#         print("this is before the func execution")
+#         fun()
+#         print("this is after func execution")
+#     return inn_fa
+
+# def p_func():
+#     print("this is inside func")
+# var = func(p_func)
+# var()
+
+
+import uuid
+a = uuid()
+print(a)

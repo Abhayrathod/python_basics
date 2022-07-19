@@ -11,3 +11,4 @@ larry.std = 9
 larry.subjects = ["hindi", "physics"]
 print(harry.section, larry.subjects)
 print(type(harry))
+print(larry.subjects[1])

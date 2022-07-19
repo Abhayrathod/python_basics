@@ -27,3 +27,18 @@ print(harry.printdetails())
 # print(rohan.printdetails())
 
 # print(harry.salary)
+
+
+
+class Student():
+    student_strength = 34
+
+    def __init__(self,sname,smarks):
+        self.name = sname
+        self.marks = smarks
+
+    def printdet(self):
+        return f"name is {self.name} and marks is {self.marks}"
+
+abhay = Student("abhay",90)
+print(abhay.printdet())
