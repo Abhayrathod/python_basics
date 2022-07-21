@@ -46,3 +46,10 @@
 # n1 = [1,2,3]
 # n2 = [4,5,6]
 # result = map(lambda x,y:x+y,n1,n2)
+
+
+import random
+import string
+
+print(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+)
