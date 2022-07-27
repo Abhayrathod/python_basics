@@ -47,9 +47,32 @@
 # n2 = [4,5,6]
 # result = map(lambda x,y:x+y,n1,n2)
 
+<<<<<<< HEAD
 
 import random
 import string
 
 print(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
 )
+=======
+#---------------------------------------------------
+
+
+# def func(fun):
+
+#     def inn_fa():
+#         print("this is before the func execution")
+#         fun()
+#         print("this is after func execution")
+#     return inn_fa
+
+# def p_func():
+#     print("this is inside func")
+# var = func(p_func)
+# var()
+
+
+import uuid
+a = uuid()
+print(a)
+>>>>>>> af653441e1a88e56701bffeca7e06dfead464ee6

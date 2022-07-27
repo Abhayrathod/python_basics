@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # class Student:
 #     pass
 
@@ -37,3 +38,19 @@ mayank = Player("mayank")
 mayank.player_name("also_mayank")
 print(id(mayank))
 print()
+
+class Student:
+    pass
+
+harry = Student()
+larry = Student()
+
+harry.name = "Harry"
+harry.std = 12
+harry.section = 1
+larry.std = 9
+larry.subjects = ["hindi", "physics"]
+print(harry.section, larry.subjects)
+print(type(harry))
+print(larry.subjects[1])
+>>>>>>> af653441e1a88e56701bffeca7e06dfead464ee6
