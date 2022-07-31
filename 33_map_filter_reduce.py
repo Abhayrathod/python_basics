@@ -94,9 +94,9 @@
 #         return True
 #     else:
 #         return False
-# # this = str(input("Enter the strings you want to check"))
-# # print(check_vowel(this))
-# sequence = ['g', 'e', 'e', 'j', 'k', 's', 'p', 'r']
+# # # this = str(input("Enter the strings you want to check"))
+# # # print(check_vowel(this))
+# sequence = ['g', 'a', 'e', 'j', 'k', 's', 'p', 'r']
 # filtered = filter(check_vowel,sequence)
 # print("The filtered letters are:")
 # for s in filtered:
