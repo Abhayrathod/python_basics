@@ -5,7 +5,7 @@
 # []                                             # list with no member, empty list
 # [1, 2, 3]                                    # list of integers 
 # [1, 2.5, 3.7, 9]                           # list of numbers (integers and floating point)
-# ['a', 'b', 'c']                               # lisst of characters
+# ['a', 'b', 'c']                               # list of characters
 # ['a', 1, 'b', 3.5, 'zero']                # list of mixed value types
 # ['One', 'Two', 'Three']               # list of strings 
 
