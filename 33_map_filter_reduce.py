@@ -1,5 +1,5 @@
 #--------------------------MAP------------------------------
-# numbers = ["3", "34", "64"]
+numbers = ["3", "34", "64"]
 # numbers = list(map(int, numbers))
 # numbers[2] = int(numbers[2]) +1
 # print(numbers)

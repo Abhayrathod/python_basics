@@ -23,7 +23,8 @@
 
 # my_string = "{}, is a {} {} science portal for {}"
 
-# print(my_string.format("GeeksforGeeks", "computer", "geeks"))
+# print(my_string.format("GeeksforGeeks", "computer", "geeks"))       
+# print(my_string.format("GeeksforGeeks", "computer", "geeks","new","old"))     #this will not give error even if this have more values
 
 #--------------------- Example 3: Python String format() with multiple placeholders----------------
 
@@ -48,8 +49,8 @@
 # # Reverse the index numbers with the parameters of the placeholders
 # print("{1} love {0}!!".format("GeeksforGeeks","Geeks"))
 
-
-# print("Every {} should know the use of {} {} programming and {}".format("programmer", "Open", "Source","Operating Systems"))
+# a = "programmer"
+# print("Every {} should know the use of {} {} programming and {}".format(a, "Open", "Source","Operating Systems"))
 
 
 # # Use the index numbers of the values to change the order that they appear in the string
@@ -57,7 +58,8 @@
 
 
 # # Keyword arguments are called by their keyword name
-# print("{gfg} is a {0} science portal for {1}".format("computer", "geeks", gfg="GeeksforGeeks"))
+# b = "GeeksforGeeks"
+# print("{gfg} is a {0} science portal for {1}".format("computer", "geeks", gfg=b))
 
 
 #--------------------------------------------Example 5-----------------------------------------

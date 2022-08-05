@@ -1,3 +1,4 @@
+# lists are mutable
 # list1 = ['harry', 'ram', 'Aakash', 'shyam', 5, 4.85]
 
 #                     #    Lists in Python
@@ -32,7 +33,7 @@
 
 
 # # Tuples in Python :
-
+# tuples are immutable
 
 # a=()    # It's an example of empty tuple
 # x=(1,)   # Tuple with single value i.e. 1 
@@ -79,22 +80,26 @@
 # b = temp
 # print(a, b)
 
-# l5=['apple', 'apple', 'banana', 'banana']
+l5=['apple', 'apple', 'banana', 'banana']
 # print(l5*2)
 # print(l5[2:5])
 # l5.append('abhay')
 # l5.remove('banana')
 # l5.pop(0)
-# # l5.clear()
+# l5.clear()
 # print(l5.index('apple'))
 # l5.extend('dhch')
 # l5.reverse()
 # l5.insert(1,34)
 # print(l5)
-# l4 = l5.copy()
+# l4 = l5         # both memory location will be same and maybe this will not create new list with name l4 so just confirm it
+# l4 = l5.copy()        # this will create new list l4 with all items from l5, memory location will be also different obviously
 # print(l4)
+# print(id(l4))
+# print(id(l5))
 # l3 = l5[0]
 # print(l3)
+# print(id(l3))
 # if "apple" in l5:
 #     print("yes")
 
@@ -103,7 +108,8 @@
 # a = thistuple[0]
 # print(a) 
 # print(thistuple[2:5])
-# print(thistuple[2:50])
+# print(thistuple[2:50])        # print up to last value even if the number is greater than the items present in list
+# print(thistuple[2:])            # print up to whatever the last value is
 # print(thistuple[2:])
 # print(thistuple[4:-1])
 # if 'apple' in thistuple:

@@ -6,13 +6,31 @@
 # for x,y in dict1.items():
 #     print(x ,":", y)
 
-# list1 = [ ["Harry", 1], ["Larry", 2],
-#           ["Carry", 6], ["Marie", 250]]
+list1 = [ ["Harry", 1], ["Larry", 2],
+          ["Carry", 6], ["Marie", 250]]
 # dict1 = dict(list1)
 # print(dict1)
+# for a in list1:
+#     print(a)
 
-# for items,value in list1:
-#     print(items,value)
+
+#-------------------------------ek list mese do value ko nikal k , do alag list me add kiya hai
+# items= []
+# value= []
+# for x,y in list1:
+#     items.append(x),value.append(y)
+# print(items,value)
+
+#-----------------------list ki value ko nikal k dictionary me add kiya hai
+dct = {}
+for x in list1:
+    for i in range(len(x)):
+        a = x[i]
+        
+        
+
+print(dct)
+
 
 # for item,value in dict1.items():
 #     print(item,value)

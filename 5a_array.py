@@ -1,8 +1,9 @@
 from array import *
 
-stud_roll = array('i',[101,102,104,108])
+stud_roll = array('i',[101,102,104,108])        # here 'i' is for indicating that array will be of integer type
+print (stud_roll)
 # stud_roll.append(106)
-# print(stud_roll[3])
+print(stud_roll[3])
 # stud_roll.remove(106)
 # print(stud_roll[3])
 
@@ -20,7 +21,7 @@ stud_roll = array('i',[101,102,104,108])
 #USING FOR LOOP
 
 # n = len(stud_roll)
-# print(n)
+# # print(n)
 # for i in range(n):
 #     print(stud_roll[i])
 

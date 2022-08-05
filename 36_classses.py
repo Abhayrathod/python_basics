@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # class Student:
 #     pass
 
@@ -52,5 +51,5 @@ larry.std = 9
 larry.subjects = ["hindi", "physics"]
 print(harry.section, larry.subjects)
 print(type(harry))
+print(type(Student))
 print(larry.subjects[1])
->>>>>>> af653441e1a88e56701bffeca7e06dfead464ee6

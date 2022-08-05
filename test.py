@@ -47,14 +47,6 @@
 # n2 = [4,5,6]
 # result = map(lambda x,y:x+y,n1,n2)
 
-<<<<<<< HEAD
-
-import random
-import string
-
-print(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
-)
-=======
 #---------------------------------------------------
 
 
@@ -72,7 +64,10 @@ print(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in ran
 # var()
 
 
-import uuid
-a = uuid()
-print(a)
->>>>>>> af653441e1a88e56701bffeca7e06dfead464ee6
+import deepl
+
+auth_key = "e725726f-95d8-e575-ebce-0d6ab88ab8b1:fx"  # Replace with your key
+translator = deepl.Translator(auth_key)
+
+result = translator.translate_text("Hello how are you", target_lang="DE")
+print(result.text)  # "Bonjour, le monde !"

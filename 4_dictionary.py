@@ -1,3 +1,5 @@
+#------------dictionary is ordered and changeable
+
 # a = {'key':'value', 'cow':'mooh'}
 # print(a['cow'])
 #will print "mooh" on the screen
@@ -18,6 +20,8 @@
 # del d3["Harry"]
 # print(d3)
 # d2.update({"Leena":"Toffee"})
+# d2.update({"Leena":"chai"})
+# print(d2)
 # print(d2.keys())
 # print(d2.values())
 # print(d2)
@@ -25,8 +29,8 @@
 
 
 #-------------------–––---–––––––dict comprehesion---------------------------
-dict1 = {i:f"item {i}" for i in range(1,1101    ) if i%100==0}
-# print(dict1)
+dict1 = {i:f"item {i}" for i in range(1,1101) if i%100==0}
+print(dict1)
 
 dict2 = {value:key for key,value in dict1.items()}
 print(dict2)
