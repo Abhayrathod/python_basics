@@ -63,11 +63,3 @@
 # var = func(p_func)
 # var()
 
-
-import deepl
-
-auth_key = "e725726f-95d8-e575-ebce-0d6ab88ab8b1:fx"  # Replace with your key
-translator = deepl.Translator(auth_key)
-
-result = translator.translate_text("Hello how are you", target_lang="DE")
-print(result.text)  # "Bonjour, le monde !"
