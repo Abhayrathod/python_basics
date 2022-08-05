@@ -33,7 +33,7 @@
 # while i<3:
 #     i+=1
 #     print("going into nested loop for",i,"time")
-#     j=0
+#     j=1
 #     while j<=4:
 #         print("this is nested loop")
 #         j+=1

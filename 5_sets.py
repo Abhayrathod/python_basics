@@ -15,7 +15,7 @@
 # print(s_from_list.isdisjoint(s1))
 
 # set1 = {'apple','mango','banana','kiwi'}
-# print(set1)
+# print(len(set1))
 # list1 = ['new','old','blue']
 # set1.update(list1)
 # dict1 = {"1":'old','2':'gold'}
