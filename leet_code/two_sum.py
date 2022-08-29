@@ -29,18 +29,34 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
 '''
 #---------------------------------------------
 
+# from typing import List
+
+# class Solution:
+#     def twoSum(self, nums: List[int], target: int) -> List[int]:
+#         for i in range(len(nums)):
+#             for j in range(i,len(nums)):
+#                 if nums[i] + nums[j] == target:
+#                     return [i,j]
+
+# abhay = Solution()
+# sum = abhay.twoSum([2,7,9,11,13],9)
+# print(sum)
+
+#---------------------------------------------
 from typing import List
+
+nums = [2,7,11,15]
+target = 9
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for i in range(len(nums)):
-            for j in range(i,len(nums)):
-                if nums[i] + nums[j] == target:
-                    return [i,j]
+        values = {}
+        for idx, value in enumerate(nums):
+            if target - value in values:
+                return [values[target - value], idx]
+            else:
+                values[value] = idx
 
 abhay = Solution()
-sum = abhay.twoSum([2,7,9,11,13],9)
-print(sum)
-
-#---------------------------------------------
-
+a = abhay.twoSum(nums, target)
+print(a) 

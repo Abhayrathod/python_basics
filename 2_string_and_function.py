@@ -143,3 +143,18 @@
 # print(str14!=str15)
 # print(0<1)
 # print("acorn">"acoustic")
+
+
+
+#---------------------------------------split function on time string
+time_obj = "2022-05-23 14:10:58+00"
+def sort_time(time:str):
+    if time is None:
+        return time 
+    else:   
+        time_lst = time.split()
+        return time_lst[0] + " " + time_lst[1].strip("+00")
+
+
+a = sort_time(time_obj)
+print(a)

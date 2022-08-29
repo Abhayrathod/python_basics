@@ -1,4 +1,4 @@
-# lists are mutable
+# lists are mutable, ordered
 # list1 = ['harry', 'ram', 'Aakash', 'shyam', 5, 4.85]
 
 #                     #    Lists in Python
@@ -80,7 +80,7 @@
 # b = temp
 # print(a, b)
 
-l5=['apple', 'apple', 'banana', 'banana']
+# l5=['apple', 'apple', 'banana', 'banana']
 # print(l5*2)
 # print(l5[2:5])
 # l5.append('abhay')
