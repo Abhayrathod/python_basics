@@ -1,10 +1,10 @@
                         #WHILE LOOPS 
 
-# a = 1
-# while (a<=10): # we can write condition without parenthesis
-#     print(a)
-#     a = a+1
-# print("exited")
+a = 1
+while (a<=10): # we can write condition without parenthesis
+    print(a)
+    a = a+1
+print("exited")
 
 
                         #printing tables by taking user input

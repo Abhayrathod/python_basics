@@ -43,13 +43,13 @@ def deleteDocuments():
 if __name__ == "__main__":
 
     #-------------------------for connecting in local----------------------------------------------------------------------
-    # client = pymongo.MongoClient('localhost',27017)
-    # db =  client['test-db']
-    # collection = db['test-collection']
-    # print(collection)
-    # posts = db.posts
-    # post_id = posts.insert_one({"p":1}).inserted_id
-    # print(post_id)
+    client = pymongo.MongoClient('localhost',27017)
+    db =  client['test-db']
+    collection = db['test-collection']
+    print(collection)
+    posts = db.posts
+    post_id = posts.insert_one({"p":1}).inserted_id
+    print(post_id)
 
     #-------------------------for connecting with mongo db atlas-----------------------------------------------------------
 
