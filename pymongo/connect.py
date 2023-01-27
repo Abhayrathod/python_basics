@@ -24,7 +24,7 @@ def readDocuments():
         print(student)
     # Using findOne function 
     myStudent = collection.find_one({"section": 1})
-    print(myStudent) 
+    print(myStudent)
 
 
 def updateDocuments():
