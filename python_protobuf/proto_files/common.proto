@@ -1,0 +1,415 @@
+syntax = "proto3";
+
+enum chgs_error {
+PB_NO_ERROR=0               ;
+PB_FAIL=1                   ;
+PB_INDEX_OUT_OF_BOUNDS=2    ;
+PB_UNKNOWN_COMMAND=0xD800   ;
+PB_UNKNOWN_IDENTITY=0xD801  ;
+PB_DEFEKT_CERT_CHAIN=0xD802 ;
+PB_INVALID_IDENTITY=0xD803  ;
+PB_CONVERT_ERROR=0xDFFF     ;
+
+WB_ALLREADY_STARTED=0xD000 ;
+WB_ALLREADY_STOPPED=0xD001 ;
+WB_NOT_INSTALLED=0XD002    ;
+
+CM_TOO_MANY_PROFILES=0xE001  ;
+CM_NO_PROFILES=0xE002        ;
+CM_PROFILE_NOT_FOUND=0xE003  ;
+CM_WRONG_PROFILE_TYPE=0xE004 ;
+CM_INVALID_ID=0xE005         ;
+CM_TOO_FEW_NODES=0xE006      ;
+
+FILE_ERROR=0XD100           ;
+MALLOC_ERROR=0XD101         ;
+QUEUE_ALLOCATE_ERROR=0XD200 ;
+QUEUE_FULL_ERROR=0XD201     ;
+
+BLE_NOT_CONNECTED_ERROR=0xD300 ;
+
+MBED_TLS_ERROR=0xD700 ;
+}
+
+// package charges.common ;
+
+message certificate {
+bytes identity_stream =1 ;
+bytes signature =2       ;
+}
+
+message identity {
+    bytes identity_tree_stream = 1 ; // contains Domain and MAC adress to make it globally unique
+    bytes device_mac = 3           ;
+    bytes public_key = 4           ;
+    int32 algorithm = 5            ;
+    enum permissions {
+        SET_TIME =0                    ;
+        OVERRIDE_USER_LOCKOUT = 1      ; // override blocking errors and Charge without INSTALLATION_DONE
+        EDIT_INSTALLATION_CONFIG = 2   ; //send initial config packet after installation
+        EDIT_SETTING = 3               ; // Change settings eg led brightness box name...
+        TRANSFER_ROOT_CERTIFICATE = 4  ; // create new box by sending cert file to BE
+        EDIT_CHARGE_PROFILE = 5        ; // Setup and change profiles different charge currents prioritize solar...
+        ADD_ACCOUNT = 6                ; // add new account for different cars and billing
+        INVITE_USER = 7                ; // add new user
+        FLASH_FIRMWARE = 8             ; // send formware to the device
+        DOWNGRADE_FIRMWARE = 9         ; // send older than current firmware version to the device
+        EDIT_SOURCE = 10               ; // change settings for energy sources
+        EDIT_STORAGE = 11              ; // change settings for energy storage entities
+        EDIT_SINK = 12                 ; //change settings for external loads
+        EDIT_EM_ALGORITHM = 13         ; // change settings of energy management
+        ADD_TOKEN = 14                 ; // add token as alias to account (RFID or CAR)
+        VIEW_ALL_STATISTICS = 15       ; // view statisticsm of all USERS on box
+        EDIT_HW_CONFIG = 16            ; // change hardware settings (type of charge cable)
+        CHARGE_CAR = 17                ; // start car charge
+        NOT_USED = 18                  ; // reserved
+        INVITE_GUEST = 19              ; // add guest user
+        EDIT_FILESYSTEM = 20           ; // view and write files to the filesystem
+        EDIT_SELF_INFO = 21            ; // change box specific information
+        USE_REMOTE_INTERFACE = 22      ; // communicate over vpn server
+        UPLOAD_FIRMWARE = 23           ; // upload new firmware package to backend
+        SEND_EOL_DOCUMENT = 24         ; // send measurement results to backend
+        DOWNLOAD_FIRMWARE = 25         ; // download firmware from backend
+        TRANSFER_TRANSACTION = 26      ; // send transaction data to backend
+        EDIT_NETWORK_SETTING = 27      ; // change wifi and cellular configuration
+        HAS_FUTURE_PERMISSIONS = 28    ; // set all following reserved fields true
+        RESERVED = 29                  ; // reserved (default value is false)
+    }
+    uint64 permission_bits =6      ;
+    int64 expiry_date =7           ;
+}
+
+message identity_tree{
+bytes domain = 1       ; // 1 byte: 1 for CHGS productive , 2 for CHGS develop
+bytes device_mac = 2   ; // 6 bytes: mac address
+bytes identity = 3     ;
+}
+
+message private_key {
+bytes identity_tree_stream = 1 ; // contains Domain and MAC adress
+bytes private_key = 4          ;
+bytes tan_code = 8             ;
+}
+
+message certificate_request {
+bytes identity_tree_ = 1      ;
+}
+
+message heartbeat {
+int64 systick = 1   ;
+int64 status = 2    ; //maybe use ENUM//
+int32 crc = 3       ;
+}
+
+enum no_of_lines {
+CHARGE_OFF = 0     ;
+CHARGE_3P = 1      ;
+CHARGE_1P = 2      ;
+}
+
+message charge_state {
+    no_of_lines charge_requested = 1   ;
+    int32 plug_state = 2               ;
+    no_of_lines actual_no_of_lines = 3 ;
+    int32 momentary_power =4           ;
+    int32 energy_total = 5             ;
+    int32 error = 6                    ;
+    int32 set_current = 7              ;
+    int32 cp_dutycyle = 8              ;
+    int32 meter_reading = 9            ;
+    int32 voltage_l1 = 10              ;
+    int32 voltage_l2 = 11              ;
+    int32 voltage_l3 = 12              ;
+    int32 current_l1 = 13              ;
+    int32 current_l2 = 14              ;
+    int32 current_l3 = 15              ;
+    uint32 meter_serial = 16;
+}
+
+message charge_state_v2 {
+    int32 plug_state = 1               ;
+    int32 momentary_power = 2          ;
+    int32 momentary_energy = 3         ;
+    int32 total_energy = 4             ;
+    int32 error = 6                    ;
+    }
+    
+    
+message profile_node {
+float charge_current = 1 ;
+uint32 duration = 2      ;
+}
+
+message charge_command {
+no_of_lines charge_activate = 1 ;
+uint32 charge_current = 2       ;
+uint32 power = 3                ;
+}
+
+message chgs_response {
+uint32 command_uid = 1  ; // unique number
+chgs_error reason =2    ; //maybe use ENUM/
+}
+
+message profile_command {
+uint32 profile_id = 1               ;
+optional bool remove = 2            ;
+oneof profile_type {
+    static_profile static_profile = 3     ;
+    modbus_profile modbus_profile = 4     ;
+    constant_profile constant_profile = 5 ;
+}
+bytes identity_tree_stream = 6      ;
+uint32 version = 7;
+}
+
+message constant_profile {
+uint32 requested_current = 1 ;
+}
+
+message static_profile {
+uint32 start_time = 1           ; // Sekunden nach 0 Uhr
+bool repeated = 2               ;
+repeated profile_node nodes = 3 ;
+message profile_node {
+no_of_lines charge_activate = 1 ;
+uint32 requested_current = 2    ; // in 10 * A -> daA
+uint32 duration = 3             ; // Zeit in Sekunden
+}
+}
+
+message modbus_profile {
+bool modbus_active = 1    ;
+}
+// End Charge Profiles //
+
+message wifi_credentials {
+string ssid = 1            ;
+string psk = 2             ;
+}
+
+message get_request {
+    int32 command_id = 1;
+    int32 index = 2;
+}
+
+message transaction_request {
+int32 last_known_transaction_id = 1 ;
+bytes identity_tree_initiator = 2   ;
+}
+
+message charge_transaction {
+int32 transaction_id = 1          ;
+bytes identity_tree_initiator = 2 ;
+int64 posix_timestamp = 3         ; // UTC
+uint32 duration_sec = 4           ;
+int32 result = 5                  ; // CHGS_Errors
+int32 meter_reading_start = 6     ;
+int32 energy = 7                  ;
+int32 charge_profile = 8          ;
+bytes charge_info = 9             ; //reserved
+}
+
+message box_settings {          //response: box_settings
+bytes device_mac             = 1 ; //serial number is read only
+int32 supply_number_of_lines = 2 ;
+int32 supply_amperage        = 3 ;
+int32 current_fw_version = 4     ;
+int32 ota_branch = 5             ;
+}
+
+message ota_package_header {    //response: ota_data_block        
+int32 branch = 1                ; //branches to distinguish between testing /preview and stable/production
+int32 version = 2               ; //use version read from box_settings +1 for testing
+int32 size = 3                  ; //size of file [bytes]
+string binary_file_path = 4     ;
+bytes binary_file_signature = 5 ;
+}
+
+message ota_data_block {        //response: ota_data_block
+int32 branch = 1         ; //branches to distinguish between testing /preview and stable/production
+int32 version = 2        ; // must be same as in header
+int32 write_address = 4  ;
+bytes block_data = 5     ; //must fit in MTU size
+}
+
+message current_charge {
+    int32 power = 1;
+    int32 energy = 2;
+}
+
+message essential_config {
+    int32 box_absolute_max_amps = 1;
+    int32 factory_set_max_amps = 2;
+    int32 installer_set_max_amps = 3 ;
+    int32 user_set_max_amps = 4;
+    bool charge_authenticate_activated = 5;
+}
+
+message chgs_configs {
+    essential_config essential = 1;
+}
+
+enum chgs_control_wallbox_commands
+{
+    CHGS_CONTROL_REBOOT_WB                              = 0;
+    /* Charge logging */
+    CHGS_CONTROL_CHARGE_LOGGING_ACTIVATE                = 1;
+    CHGS_CONTROL_CHARGE_LOGGING_DEACTIVATE              = 2;
+    CHGS_CONTROL_CHARGE_LOGGING_ACTIVATE_PERSISTANT     = 3;
+    CHGS_CONTROL_CHARGE_LOGGING_DEACTIVATE_PERSISTANT   = 4;
+    CHGS_CONTROL_CHARGE_LOGGING_WIPE_CONFIG             = 5;
+    // 6 -10 : Reserved
+
+    /* Plug & Start control */
+    CHGS_CONTROL_CHARGE_PLUG_START_ACTIVATE             = 11;
+    CHGS_CONTROL_CHARGE_PLUG_START_DEACTIVATE           = 12;
+    // 13 -20 : Reserved
+
+    /* Remote telnet logging */
+    CHGS_CONTROL_LOGGING_ENABLE_TELNET                  = 21;
+    CHGS_CONTROL_LOGGING_DISABLE_TELNET                 = 22;
+    // 23 - 30 : Reserved
+
+    /* Loadmanagement */
+    CHGS_CONTROL_CHARGE_ENABLE_LOADM                  = 31;
+    CHGS_CONTROL_CHARGE_DISABLE_LOADM                 = 32;
+    CHGS_CONTROL_CHARGE_LOADM_SET_GROUP_ID_1          = 33;
+    CHGS_CONTROL_CHARGE_LOADM_SET_GROUP_ID_2          = 34;
+    CHGS_CONTROL_CHARGE_LOADM_SET_GROUP_ID_3          = 35;
+    CHGS_CONTROL_CHARGE_LOADM_SET_GROUP_ID_4          = 36;
+    CHGS_CONTROL_CHARGE_LOADM_SET_GROUP_ID_5          = 37;
+    CHGS_CONTROL_CHARGE_LOADM_SET_TIME_SLOT_10        = 38;
+    CHGS_CONTROL_CHARGE_LOADM_SET_TIME_SLOT_20        = 39;
+    CHGS_CONTROL_CHARGE_LOADM_SET_TIME_SLOT_30        = 40;
+
+    /* STM log to backend */
+    CHGS_CONTROL_STM_LOG_ENABLE = 41;
+    CHGS_CONTROL_STM_LOG_DISABLE = 42;
+    // 43 - 50 : Reserved
+
+    /* Charge history */
+    CHGS_CONTROL_CHARGE_HISTORY_START_FLUSH = 51;
+    CHGS_CONTROL_CHARGE_HISTORY_RESET = 52;
+    // 53 - 60 : Reserved
+
+    /* LED brightness */
+    CHGS_CONTROL_LED_BRIGHTNESS_10 = 61;
+    CHGS_CONTROL_LED_BRIGHTNESS_20 = 62;
+    CHGS_CONTROL_LED_BRIGHTNESS_30 = 63;
+    CHGS_CONTROL_LED_BRIGHTNESS_40 = 64;
+    CHGS_CONTROL_LED_BRIGHTNESS_50 = 65;
+    CHGS_CONTROL_LED_BRIGHTNESS_60 = 66;
+    CHGS_CONTROL_LED_BRIGHTNESS_70 = 67;
+    CHGS_CONTROL_LED_BRIGHTNESS_80 = 68;
+    CHGS_CONTROL_LED_BRIGHTNESS_90 = 69;
+    CHGS_CONTROL_LED_BRIGHTNESS_100 = 70;
+
+    /* NVS */
+    CHGS_CONTROL_NVS_FORMAT = 71;
+    // 72 - 80 : Reserved
+
+    /* Auto sense vehicle stopped charging */
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_1 = 81;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_5 = 82;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_10 = 83;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_30 = 84;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_60 = 85;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_120 = 86;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_240 = 87;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_480 = 88;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_960 = 89;
+    CHGS_CONTROL_AUTO_SENSE_STOP_TOUT_1440 = 90;
+
+    /* WiFi */
+    CHGS_CONTROL_WIFI_STA_GET_CONNECTION_STATUS = 91;
+    CHGS_CONTROL_WIFI_STA_GET_RSSI = 92;
+    CHGS_CONTROL_WIFI_STA_GET_IP = 93;
+    CHGS_CONTROL_WIFI_STA_GET_LAST_ERROR = 94;
+    CHGS_CONTROL_WIFI_STA_DISCONNECT = 95;
+    CHGS_CONTROL_WIFI_STA_RECONNECT = 96;
+    CHGS_CONTROL_WIFI_STA_DELETE_CREDENTIALS = 97;
+    // 98 -100 : Reserved
+
+    /* Charging */
+    CHGS_CONTROL_CHARGING_START_CHARGING = 101;
+    CHGS_CONTROL_CHARGING_PAUSE_CHARGING = 102;
+    CHGS_CONTROL_CHARGING_RESUME_CHARGING = 103;
+    CHGS_CONTROL_CHARGING_STOP_CHARGING = 104;
+    CHGS_CONTROL_CHARGING_GET_CURRENT_POWER = 105;
+    CHGS_CONTROL_CHARGING_GET_ALLOWED_POWER = 106;
+    CHGS_CONTROL_CHARGING_GET_RELAY_STATUS = 107;
+    CHGS_CONTROL_CHARGING_GET_METER_READING = 108;
+    CHGS_CONTROL_CHARGING_GET_PLUG_STATE = 109;
+}
+
+message chgs_control_wallbox
+{
+    chgs_control_wallbox_commands command = 1;
+}
+
+message chgs_charge_invite
+{
+    bytes target = 1;
+    bytes invite_uuid = 2;
+}
+
+message chgs_charge_event
+{
+    bytes location_uuid = 1;
+    bytes event_uuid = 2;
+    bytes user_uuid = 3;
+    bytes vehicle_uuid = 4;
+    int32 epoch_timestamp_begin = 5;
+    int32 duration_secs = 6;
+    int32 meter_readig_begin_Wh = 7;
+    int32 energy_Wh = 8;
+    enum command_origin {
+        INITIATOR_UNKNOWN = 0;
+        INITIATOR_APP = 1;
+        INITIATOR_RFID = 2;
+        INITIATOR_INVITE_LINK = 3;
+    }
+    int32 initiator = 9;
+    bool complete = 10;
+    bool submitted = 11;
+    bytes additinal_information = 99; // reserved
+}
+
+
+enum modbus_data_type {
+    BIT         = 0;
+    UINT8       = 1;
+    UINT16      = 2;
+    UINT32      = 3;
+    SINT8       = 4;
+    SINT16      = 5;
+    SINT32      = 6;
+    FLOAT       = 7;
+    ASCII       = 8;
+}
+
+
+message modbus_parameter {
+    // uint32 cid              = 1;
+    uint32 did              = 2;
+    string name             = 3;
+    string unit             = 4;
+    string address          = 5;
+    uint32 count            = 6;
+    modbus_data_type type   = 7;
+    int32 fixpoint          = 8;
+}
+
+message modbus_device {
+    uint32 did              = 1;
+    uint32 unit_id          = 2;
+    uint32 port 	        = 3;
+    string ip               = 4;
+}
+
+message wallbox_uuid_connection_status
+{
+    bytes uuid = 1;
+    bool is_connected = 2;
+}

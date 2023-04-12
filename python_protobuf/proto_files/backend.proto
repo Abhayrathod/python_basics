@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+import "common.proto"; //check which path to specify //specifies transport encoding, certificates and message signing
+import "app.proto";
+
+message transport_wrapper {
+    bytes content_wrapper_stream = 1;
+    bytes identity_tree_stream = 2;
+    bytes signature =3; 
+}
+
+message content_wrapper {
+    int32 command_uid = 1; 
+    int32 protocol_version = 2;
+    oneof command {
+        bytes command_chunk = 3;
+        heartbeat heartbeat = 4;
+        certificate certificate = 5;
+        firmware_update_info firmware_update_info = 6;
+        // 7
+        // 8    
+        user_registration user_registration = 9;
+        response response = 10;
+        chgs_response chgs_response = 11;
+        // 12
+        user_creation_response user_creation_response = 13;
+        key_request key_request = 14;
+        key_request_response key_request_response = 15;
+        private_key private_key = 16;
+        charge_transaction charge_transaction = 17;
+        transaction_request transaction_request = 18;
+        powergrid_brain_calls_log powergrid_brain_calls_log = 19;
+        // 20
+        // 21
+        ota_package_header ota_package_header = 22;
+        chgs_configs chgs_config = 23;
+        chgs_control_wallbox control_wallbox = 24;
+        chgs_charge_invite charge_invite = 25;
+        wallbox_uuid_connection_status ble_connection = 26;
+    }
+}
+
+message error {
+    int32 command_uid = 1;
+    int32 reason =2; //maybe use ENUM/
+}
+
+//message heartbeat {
+//    int64 systick =1;
+//    int64 status =2; //maybe use ENUM/
+//}
+
+message firmware_update_info {
+    bytes device_mac_adress = 1;
+    int32 fw_version_device_current = 2;
+    int32 fw_version_device_target = 3;
+    string fw_update_path_esp = 4;
+    string fw_update_hash_esp = 5;
+    string fw_update_path_stm = 6;
+    string fw_update_hash_stm = 7;
+}
+
+message key_request {
+    string tan_code = 1;
+    string email = 2;
+    string name = 3;
+    string phone_id = 4;
+}
+
+message key_request_response {
+    certificate certificate = 1;
+    private_key private_key = 2;
+    certificate boxrootcert = 3;
+    certificate backendcert = 4;
+    }
+    
+    message box_creation {
+        certificate certificate = 1;
+        private_key private_key = 2;
+    }
+
+message powergrid_brain_calls_log {
+    string info = 1;
+    int64 posix_timestamp = 2;     // UTC
+}
+
+////////////////////////////////////////
+// User management
+////////////////////////////////////////
+// The first message that must be sent by the client after connecting, so the backend, can verify his identity via the
+// signature, content of the dummy string is (currently) irrelevant
+
+// Existing user creating a new user
+
+message user_creation {
+    certificate certificate = 1;
+    private_key private_key = 2;
+    string email = 3;
+    string name = 4;
+}
+
+message user_creation_response{
+    bytes tan_code = 8;
+}
+
+// Existing user creating a new user
+message user_registration {
+    string email = 1;
+    string name = 2;
+    certificate certificate = 3;
+
+}
+
+message user_registration_response {
+    string code = 1;
+}
+
+message user_login_response {
+}
+
+// user_registration request is currently unused, but the response will be sent, when connecting with a code as query parameter
+message user_claim_code {
+    string email = 1;
+    string code = 2;
+}
+
+message user_claim_code_response {
+    certificate certificate = 1;
+    string name = 2;
+    string email = 3;
+}
+
+
+message permissions_request {
+}
+
+message permissions_update {
+    repeated bool permissions = 1;
+}
+
+
+////////////////////////////////////////
+// Base response type
+////////////////////////////////////////
+// Since most requests will expect a response, this contains some common fields and wraps the specific response data
+message response {
+    int32 request_uid = 1;
+    bool success = 2;
+    int32 error_code = 3;
+    // resonse_data is optional, if only succes or error_code are relevant for a request
+    oneof response_data {
+        user_login_response user_login_response = 4;
+        user_creation_response user_creation_response = 5;
+        user_registration_response user_registration_response = 6;
+    }
+}
+

@@ -1,0 +1,10 @@
+debug_msg.message           max_length:80
+
+adc_raw_readings.readings_U1   max_size:100
+adc_raw_readings.readings_I1   max_size:100
+adc_raw_readings.readings_I2   max_size:100
+adc_raw_readings.readings_I3   max_size:100
+
+
+full_ct_adc_samples.samples_array max_size:2000
+

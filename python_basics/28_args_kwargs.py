@@ -6,6 +6,7 @@
 def funargs(normal,*args,**kwargs):
     print(normal)
     print(type(args))
+    print(type(kwargs))
     print(args[4])
     for items in args:
         print(items)

@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+import "common.proto"; //check which path to specify //specifies certificates and message signing
+
+message transport_notification {
+    int32 command_uid = 1;
+    int32 message_available =2; //maybe use ENUM/
+}
+
+
+message ble_transport_wrapper {
+    bytes ble_content_wrapper_stream = 1;
+    //ble_content_wrapper  ble_content_wrapper = 1;
+    bytes identity_tree_stream = 2; // 0 for now
+    bytes signature =3; // 0 for now
+}
+
+// content Warpper is includes as bytes in transport Wrapper to ease check via signature
+message ble_content_wrapper {
+    int32 command_uid = 1; // increasing number, per packet
+    int32 protocol_version = 2; // is 1 for now
+    oneof command {
+        /*
+        reserved 5; /         debug_msg debug_msg = 5;
+        reserved 6; /         type2_state type2_state = 6;
+        reserved 7; /         cs_cal_result cs_cal_result = 7;
+        */
+        bytes command_chunk = 3;
+        charge_command charge_command = 4;
+        chgs_response chgs_response=5;
+        charge_info charge_info = 8;
+        get_time_command get_time_command=9;
+        set_time_command set_time_command=10;
+        certificate certificate = 11;
+        heartbeat heartbeat = 12;
+        info_command info_command = 13;
+        certificate_request certificate_request=14;
+        private_key private_key = 15;
+        charge_transaction charge_transaction = 16;
+        profile_command profile_command = 17;
+        transaction_request transaction_request = 19;
+        synchronize_profiles synchronize_profiles = 20;
+        box_settings box_settings =21;
+        ota_package_header ota_package_header =22;
+        ota_data_block ota_data_block =23;
+        bytes mirror_test_command = 24;
+        wallbox_uuid_connection_status ble_connection = 25;
+    }   
+}
+
+
+message info_command {
+    enum getinfovalues {
+        DEFAULT =0;
+        GET_CHARGE_INFO =1;
+    }
+    getinfovalues get_charge_info = 1;
+}
+
+message get_time_command{
+    enum gettimevalue {
+        DEFAULT =0;
+        GET_TIME =1;
+    }
+    gettimevalue  get_time_command = 1;
+}
+
+message set_time_command{
+    uint32 UTC_Time=1;
+    int32 Timezoneoffset=2;
+    int32 Summertime=3;
+}
+
+message charge_info {
+    int32 chargetime_hour = 1;
+    int32 chargetime_min = 2;
+    int32 chargetime_seconds = 3;
+    float chargepower = 4;
+    float chargedenergy = 5;
+}
+
+message advertise_status { //was advertpb, use only for bt advertisements.
+    enum wallboxstatus {
+        WALLBOX_IS_UNDEFINED = 0;
+        WALLBOX_IS_CHARGING = 1;
+        WALLBOX_IS_AVAILABLE = 2;
+        WALLBOX_IS_CONNECTED = 3;
+        WALLBOX_HAS_ERROR = 4;
+        WALLBOX_IS_NOT_INSTALLED = 5;
+     }
+    bytes mac_address=1;   //was SNstring
+    wallboxstatus Status =2; //maybe use ENUM/
+}
+
+
+message synchronize_profiles {
+    repeated uint32 saved_ids = 1;
+}
+

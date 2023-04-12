@@ -1,0 +1,48 @@
+certificate.signature                       max_size:150
+certificate.identity_stream                 max_size:150
+
+identity.identity_tree_stream               max_size:80
+identity.device_mac                         max_size:6
+identity.public_key                         max_size:150
+
+identity_tree.domain                        max_size:1
+identity_tree.device_mac                    max_size:7
+identity_tree.identity                      max_size:80
+
+private_key.identity_tree_stream            max_size:80
+private_key.tan_code                        max_size:8
+private_key.private_key                     max_size:150
+
+charge_transaction.identity_tree_initiator  max_size:80
+charge_transaction.charge_info              max_size:8
+
+static_profile.nodes                        max_count:4
+
+wifi_credentials.ssid                       max_size:32
+wifi_credentials.psk                        max_size:64
+
+transaction_request.identity_tree_initiator max_size:80
+
+profile_command.identity_tree_stream        max_size:150
+
+box_settings.device_mac                     max_size:6
+ota_package_header.binary_file_path         max_size:150
+ota_package_header.binary_file_signature    max_size:150
+
+ota_data_block.block_data                   max_size:500
+
+chgs_charge_invite.target                   max_size:6
+chgs_charge_invite.invite_uuid              max_size:16
+
+chgs_charge_event.location_uuid             max_size:16
+chgs_charge_event.event_uuid                max_size:16
+chgs_charge_event.user_uuid                 max_size:16
+chgs_charge_event.vehicle_uuid              max_size:16
+
+modbus_device.ip                            max_size:17
+modbus_parameter.name                       max_size:17
+modbus_parameter.unit                       max_size:5
+modbus_parameter.address                    max_size:7
+
+wallbox_uuid_connection_status              max_size:16
+

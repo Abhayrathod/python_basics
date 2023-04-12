@@ -1,0 +1,11 @@
+firmware_update_info.fw_update_path_esp     max_size:128
+firmware_update_info.fw_update_path_stm     max_size:128
+firmware_update_info.fw_update_hash_esp     max_size:33
+firmware_update_info.fw_update_hash_stm     max_size:33
+firmware_update_info.device_mac_adress      max_size:6
+
+transport_wrapper.identity_tree_stream      max_size:150
+transport_wrapper.signature                 max_size:150
+
+permissions_update.permissions              max_size:10
+

@@ -1,0 +1,213 @@
+syntax = "proto3";
+
+import "common.proto"; //common defintions for Powerjames Communication
+
+message stm_content_wrapper {
+     int32 command_uid = 1; 
+     int32 protocol_version = 2;
+     oneof command {
+         bytes command_chunk = 3;
+         charge_command charge_command = 4;
+         debug_msg debug_msg = 5;
+         type2_state type2_state = 6;
+         cs_cal_result cs_cal_result = 7;
+         heartbeat heartbeat = 8;
+         chgs_response chgs_response =9;
+         charge_state stm_charge_state = 10;
+         led_control led_control = 11;
+         firmware_status firmware_status = 13;
+         meter_data meter_data = 14;
+         current_limit_info current_limit_info = 15;
+         set_master_brightness set_master_brightness = 17;
+         adc_raw_readings adc_raw_readings = 18;
+     }   
+ }
+
+message debug_msg {
+     int64 systick  = 1;
+     string message = 2;
+     int64 value = 3;
+}
+
+enum cs_test_steps {
+    CS_TEST_FIND_ZERO_START = 0;
+    CS_TEST_FIND_ZERO = 1;
+    CS_TEST_FIND_POLARITY_START = 2;
+    CS_TEST_FIND_POLARITY = 3;
+    CS_TEST_CALIBRATE_START = 4;
+    CS_TEST_CALIBRATE = 5;
+    CS_TEST_SETTLE = 6;
+    CS_TEST_MONITOR = 7;
+};
+
+
+enum chgs_contactor_state
+{
+    CHGS_TYPE2_IF_CONTACTOR_STATE_UNKNOWN = 0;
+    CHGS_TYPE2_IF_CONTACTOR_STATE_L1_N_CLOSED =         4096;
+    CHGS_TYPE2_IF_CONTACTOR_STATE_L2_L3_CLOSED =        8192;
+    CHGS_TYPE2_IF_CONTACTOR_STATE_L1_N_OPEN =           16384;
+    CHGS_TYPE2_IF_CONTACTOR_STATE_L2_L3_OPEN =          32768;
+}
+
+message type2_state {
+     int32 cp_system_state  = 1;
+     int32 cp_v_pos = 2;
+     int32 cp_v_neg = 3;
+     int32 cp_v_supply_pos = 4;
+     int32 cp_v_supply_neg = 5;
+     int32 adc_v_supply = 6;
+     int32 pwm_set_current = 7;
+     int32 pwm_duty = 8;
+     int32 last_err = 9;
+     int32 init_state = 10;
+     int32 cs_test_result = 11;
+     int32 cs_current = 12;
+     int32 cp_v_pos_in_bounds = 13;
+     int32 cp_v_neg_in_bounds = 14;
+     chgs_contactor_state contactors = 15;
+     bool cs_in_use = 16;
+     cs_test_steps cs_state = 17;
+     bool charging_allowed = 18;
+}
+
+enum mid_meter_state {
+     MID_METER_STATE_UNKNOWN = 0;
+     MID_METER_STATE_SCANNING = 1;
+     MID_METER_STATE_CONNECTION_ESTABLISHED = 2;
+}
+
+message meter_data {
+     //general
+     uint32 serial_number = 1;
+     uint32 meter_id = 2;
+     uint32 baud_rate = 3;
+     float software_version = 4;
+     float hardware_version = 5;
+     uint32 ct_rate = 6;
+     float s0_output_rate = 7;
+     uint32 a3 = 8;
+     uint32 cycle_time = 9;
+
+     //electrical
+     uint32 grid_frequency = 10;
+
+     uint32 l1_voltage = 11;
+     uint32 l2_voltage = 12;
+     uint32 l3_voltage = 13;
+
+     uint32 l1_current = 14;
+     uint32 l2_current = 15;
+     uint32 l3_current = 16;
+
+     //power
+     uint32 total_active_power = 17;
+     uint32 l1_active_power = 18;
+     uint32 l2_active_power = 19;
+     uint32 l3_active_power = 20;
+
+     uint32 total_reactive_power = 21;
+     uint32 l1_reactive_power = 22;
+     uint32 l2_reactive_power = 23;
+     uint32 l3_reactive_power = 24;
+
+     uint32 total_apparent_power = 25;
+     uint32 l1_apparent_power = 26;
+     uint32 l2_apparent_power = 27;
+     uint32 l3_apparent_power = 28;
+
+     uint32 total_power_factor = 29;
+     uint32 l1_power_factor = 30;
+     uint32 l2_power_factor = 31;
+     uint32 l3_power_factor = 32;
+
+     //active energy
+     uint64 total_active_energy = 33;
+     uint64 l1_total_active_energy = 34;
+     uint64 l2_total_active_energy = 35;
+     uint64 l3_total_active_energy = 36;
+
+     uint64 forward_active_energy = 37;
+     uint64 l1_forward_active_energy = 38;
+     uint64 l2_forward_active_energy = 39;
+     uint64 l3_forward_active_energy = 40;
+
+     uint64 reverse_active_energy = 41;
+     uint64 l1_reverse_active_energy = 42;
+     uint64 l2_reverse_active_energy = 43;
+     uint64 l3_reverse_active_energy = 44;
+
+     //reactive energy
+     uint64 total_reactive_energy = 45;
+     uint64 l1_reactive_energy = 46;
+     uint64 l2_reactive_energy = 47;
+     uint64 l3_reactive_energy = 48;
+
+     uint64 forward_reactive_energy = 49;
+     uint64 l1_forward_reactive_energy = 50;
+     uint64 l2_forward_reactive_energy = 51;
+     uint64 l3_forward_reactive_energy = 52;
+     
+     uint64 reverse_reactive_energy = 53;
+     uint64 l1_reverse_reactive_energy = 54;
+     uint64 l2_reverse_reactive_energy = 55;
+     uint64 l3_reverse_reactive_energy = 56;
+
+     bool pcb_connection = 57;
+     mid_meter_state state = 58;
+     uint32 total_meter_polls = 59;
+     uint32 total_meter_polls_failed = 60;
+     uint32 consecutive_meter_poll_fails_max = 61;
+ }
+
+message cs_cal_result {
+     int32 init_state  = 1;
+     int32 cal_result= 2;
+     int32 test_loop_polarity = 3;
+     int32 cal_neg_res = 4;
+     int32 cal_pos_res = 5;
+     int32 adc_v_supply = 6;
+}
+
+message firmware_status {
+     uint32 firmware_version = 1;
+     uint32 firmware_installation_date = 2;
+     uint32 firmware_crc = 3;
+}
+
+message led_control { 
+     uint32 animation_id = 1; 
+     uint32 rgb_color = 2; 
+     uint32 led_index = 3; 
+     uint32 speed = 4; 
+     uint32 repetitions = 5; 
+     uint32 duty_cycle = 6; 
+     bool dir = 7; 
+     bool usequeue = 8; 
+ }
+ 
+message current_limit_info {
+     uint32 current_limit = 1;
+}
+
+message set_master_brightness {
+     uint32 brightness = 1;
+}
+
+message adc_raw_readings
+{
+     bytes readings_U1 = 1;
+     bytes readings_I1 = 2;
+     bytes readings_I2 = 3;
+     bytes readings_I3 = 4;
+}
+
+message full_ct_adc_samples
+{
+     bytes samples_array = 1;
+
+     uint32 num_samples = 2;
+     uint32 sample_size_bytes = 3;
+     uint32 num_channels = 4;
+     uint32 oversampling= 5;
+}

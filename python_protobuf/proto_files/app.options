@@ -1,0 +1,10 @@
+advertise_status.mac_address                max_size:6
+advertise_status.Status                     int_size:IS_8
+
+ble_content_wrapper.command_chunk           max_size:5
+ble_content_wrapper.mirror_test_command     max_size:100
+
+ble_transport_wrapper.identity_tree_stream  max_size:120
+ble_transport_wrapper.signature             max_size:120
+
+synchronize_profiles.saved_ids              max_count:10

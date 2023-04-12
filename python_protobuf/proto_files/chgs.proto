@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "common.proto"; //common defintions for Powerjames Communication
+
+message chgsconfig {
+    enum boxinstalled {
+        DEFAULT = 0; 
+        BOX_INSTALLED = 1; 
+    
+    } 
+    boxinstalled box_is_installed = 1; 
+    uint32 charge_current =2; 
+    string bluetoothname = 3; 
+    uint32 charge_transaction_id = 4;
+}
+
+message chgs_content_wrapper { 
+    uint32 command_uid = 1; /* increasing number, per packet */
+    uint32 protocol_version = 2; /* is 1 for now */
+    oneof command {
+        chgsconfig chgsconfig = 3;
+        certificate certificate = 4;
+    }
+}
+
+message chgs_transport_wrapper {
+    chgs_content_wrapper chgs_content_wrapper = 1;
+    bytes identity_tree = 2; // 0 for now
+    bytes signature = 3; // 0 for now
+}
+
+message charge_transaction_perist {
+    int32 last_transaction_id       = 1;
+    int32 last_id_synced            = 2;
+    int32 transactions_in_file      = 3;
+}
