@@ -1,31 +1,3 @@
-                           #FIBONACCI SEQUENCE
-
-# print("Fibonacci sequence: ")
-# nterms = int(input("Please enter the term for which you want to print fibonacci sequence"))
-# count = 0
-# n1 =0
-# n2 = 1
-# while count < nterms:
-#     print (n1)
-#     nth = n1 + n2
-#     n1 = n2
-#     n2 = nth
-#     count += 1
-                  #OR      # fibonacci as a function
-# def fibo(nt):
-#     n1 = 0
-#     n2 = 1
-#     count = 0
-#     while count<nt:
-#         print(n1)
-#         n3=n1+n2
-#         n1=n2
-#         n2=n3
-#         count+=1
-
-# fibo(int(input("Enter the terms up to which you want to print fibonacci no")))  
-
-
                             # REVERSING NO WITHOUT USING ANY FUNCTION
 
 # list1 = [1, 2, 3, 4, 5]
@@ -88,33 +60,3 @@
 #         if list1[j]>list1[k]:
 #             list1[j],list1[k] = list1[k],list1[j]
 # print("The sorted list in ascending order is:",list1)
-
-
-                           # PRINTING ID OF NO IN RAM MEMORY
-
-# a=2
-# print('id(2) = ',id(2))
-# print('id(a) = ',id(a))
-# a= a+1
-# print('id(3)=',id(3))
-# b =2 
-# print('id(2)',id(2))
-
-# str = "ts is ng le"
-# a = dict(str.split())
-# del a['t']
-
-
-                            # PALINDROME CHECK 
-
-# a = str(input("Enter the string for palindrome verification: "))
-# def ispalindrome(a):
-#     for i in range(0,int(len(a)/2)):
-#         if a[i] != a[len(a)-i-1]:
-#             return False
-#     return True
-
-# if ispalindrome(a):
-#     print("yes")
-# else:
-#     print("no")
